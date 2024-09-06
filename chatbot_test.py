@@ -29,6 +29,7 @@ async def get_chatbot_response(user_input: str) -> str:
         # Here is another example of adding the AzureChatCompletion service to the kernel
         # By default, the service uses the environment variables for the API key, endpoint, and deployment name found in the .env file
         # take a look at the .env.example file for an example of how to set these variables
+        breakpoint()
         kernel.add_service(AzureChatCompletion(
             service_id="gpt-4o"
         ))
