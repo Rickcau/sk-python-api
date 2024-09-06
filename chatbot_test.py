@@ -19,20 +19,23 @@ async def get_chatbot_response(user_input: str) -> str:
         
         # Use environment variables for sensitive information
         # here is one example of adding the AzureChatCompletion service to the kernel
-        # kernel.add_service(AzureChatCompletion(
-        #     service_id=service_id,
-        #     api_key=os.environ.get("AZURE_OPENAI_API_KEY"),
-        #     endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
-        #     deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME"),
-        # ))
+        api_key=os.environ.get("AZURE_OPENAI_API_KEY")
+        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT")
+        deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME")
+        
+        kernel.add_service(AzureChatCompletion(
+            service_id=service_id,
+            api_key=api_key,
+            endpoint=endpoint,
+            deployment_name=deployment_name,
+        ))
         
         # Here is another example of adding the AzureChatCompletion service to the kernel
         # By default, the service uses the environment variables for the API key, endpoint, and deployment name found in the .env file
         # take a look at the .env.example file for an example of how to set these variables
-        breakpoint()
-        kernel.add_service(AzureChatCompletion(
-            service_id="gpt-4o"
-        ))
+        # kernel.add_service(AzureChatCompletion(
+        #     service_id="gpt-4o"
+        # ))
         
         chat_history.add_system_message("You are a helpful assistant.")
         
@@ -56,6 +59,8 @@ async def get_chatbot_response(user_input: str) -> str:
             ],
             execution_settings=OpenAIChatPromptExecutionSettings(service_id=service_id, max_tokens=4000, temperature=0.2),
         )
+  
+        # OpenAIChatPromptExecutionSettings(service_id=service_id, max_tokens=4000, temperature=0.2)
         
         # Add the function to the kernel
         chat_function = kernel.add_function(
