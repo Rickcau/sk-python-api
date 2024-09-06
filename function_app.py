@@ -1,3 +1,4 @@
+import os
 import azure.functions as func
 import logging
 from azure.monitor.opentelemetry.exporter import (
@@ -11,6 +12,7 @@ from opentelemetry.trace import set_tracer_provider
 import chatbot_test
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+instrumentation_key = os.environ.get("APPINSIGHTS_INSTRUMENTATIONKEY")
 
 def set_up_tracing():
     trace_exporter = AzureMonitorTraceExporter(connection_string="InstrumentationKey=9ef3dff9-42aa-486c-828c-22e368e55809;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=15cd47dc-de26-4cf9-bb72-baf02592192d")

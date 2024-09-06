@@ -7,3 +7,4 @@ azure-functions
 openai
 semantic_kernel
 azure-monitor-opentelemetry-exporter==1.0.0b24
+pydantic==2.8.2

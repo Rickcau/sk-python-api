@@ -6,6 +6,10 @@ from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
 from semantic_kernel.contents.chat_history import ChatHistory
 from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings, AzureChatCompletion
 
+# This is a simple chatbot that uses the Semantic Kernel and Azure OpenAI to provide responses to user input
+# it's intended to be run in a local environment, but you can adapt it to run in a serverless function
+# the goal is to keep everything very simple and it help you understand the options for how to assoicate the chatbot with the Azure OpenAI service endpoints and API keys
+
 async def get_chatbot_response(user_input: str) -> str:
     try:
         # Initialize chat history
@@ -14,11 +18,19 @@ async def get_chatbot_response(user_input: str) -> str:
         service_id = "chatbot_service"
         
         # Use environment variables for sensitive information
+        # here is one example of adding the AzureChatCompletion service to the kernel
+        # kernel.add_service(AzureChatCompletion(
+        #     service_id=service_id,
+        #     api_key=os.environ.get("AZURE_OPENAI_API_KEY"),
+        #     endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
+        #     deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME"),
+        # ))
+        
+        # Here is another example of adding the AzureChatCompletion service to the kernel
+        # By default, the service uses the environment variables for the API key, endpoint, and deployment name found in the .env file
+        # take a look at the .env.example file for an example of how to set these variables
         kernel.add_service(AzureChatCompletion(
-            service_id=service_id,
-            api_key=os.environ.get("AZURE_OPENAI_API_KEY"),
-            endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
-            deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME"),
+            service_id="gpt-4o"
         ))
         
         chat_history.add_system_message("You are a helpful assistant.")
@@ -71,11 +83,6 @@ async def get_chatbot_response(user_input: str) -> str:
         return "I'm sorry, but I encountered an error while processing your request."
 
 async def main():
-    # Set up environment variables (replace these with your actual values)
-    os.environ["AZURE_OPENAI_API_KEY"] = "your_api_key_here"
-    os.environ["AZURE_OPENAI_ENDPOINT"] = "your_endpoint_here"
-    os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"] = "your_deployment_name_here"
-
     print("Chatbot initialized. Type 'quit' to exit.")
     
     while True:
