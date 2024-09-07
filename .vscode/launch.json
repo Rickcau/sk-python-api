@@ -11,6 +11,9 @@
       "python": "${workspaceFolder}/.venv/bin/python",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
+      },
+      "windows": {
+        "python": "${workspaceFolder}\\.venv\\Scripts\\python"
       }
     },
     {

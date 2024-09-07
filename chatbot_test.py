@@ -20,8 +20,8 @@ async def get_chatbot_response(user_input: str) -> str:
         # Use environment variables for sensitive information
         # here is one example of adding the AzureChatCompletion service to the kernel
         api_key=os.environ.get("AZURE_OPENAI_API_KEY")
-        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT")
-        deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME")
+        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT") 
+        deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME") 
         
         kernel.add_service(AzureChatCompletion(
             service_id=service_id,
