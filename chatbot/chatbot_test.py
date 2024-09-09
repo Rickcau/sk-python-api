@@ -19,9 +19,12 @@ async def get_chatbot_response(user_input: str) -> str:
         
         # Use environment variables for sensitive information
         # here is one example of adding the AzureChatCompletion service to the kernel
-        api_key=os.environ.get("AZURE_OPENAI_API_KEY")
-        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT") 
-        deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME") 
+        # api_key=os.environ.get("AZURE_OPENAI_API_KEY")
+        # endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT") 
+        # deployment_name=os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME") 
+        api_key="<add your key here>"
+        endpoint="<add your endpoint here>"
+        deployment_name="<add your deployment name here>" 
         
         kernel.add_service(AzureChatCompletion(
             service_id=service_id,
@@ -88,17 +91,17 @@ async def get_chatbot_response(user_input: str) -> str:
         print(f"An error occurred: {e}")
         return "I'm sorry, but I encountered an error while processing your request."
 
-async def main():
-    print("Chatbot initialized. Type 'quit' to exit.")
+# async def main():
+#     print("Chatbot initialized. Type 'quit' to exit.")
     
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() == 'quit':
-            print("Goodbye!")
-            break
+#     while True:
+#         user_input = input("You: ")
+#         if user_input.lower() == 'quit':
+#             print("Goodbye!")
+#             break
         
-        response = await get_chatbot_response(user_input)
-        print(f"Assistant: {response}")
+#         response = await get_chatbot_response(user_input)
+#         print(f"Assistant: {response}")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
