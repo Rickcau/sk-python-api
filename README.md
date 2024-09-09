@@ -1,5 +1,8 @@
 # sk-python-api
 
+## local.settings.json.bak
+You will need to rename this file to local.settings.json before running **func start**
+
 ## test_sk.py
 This file is for testing SK and make sure the calls are working before trying to use them from the Python Azure Function.
 
@@ -8,9 +11,14 @@ This file is for testing SK and make sure the calls are working before trying to
 2. CD test_sk
 3. python test_sk
 
+You will note that running this code standalone works as expected.
+
 The SK will call the LLM with the prompt "Why is the Sky Blue?" and you will get a proper response in the terminal Window.
 
-## How to reproduce the issue.
+## Same code does not work when ran in context of Python Azure Function (using Python 3.10)  
+Azure functions does not support anything greating than 3.11.x
+
+## How to reproduce the issue within the Azure Python Function.
 The test_sk() function has already been copied into the function_app.py file.
 
 ** Important Note **
