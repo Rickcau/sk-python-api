@@ -20,6 +20,7 @@ from semantic_kernel.contents.chat_history import ChatHistory
 from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings, AzureChatCompletion
 from semantic_kernel.functions import kernel_function
 
+logging.basicConfig(level=logging.DEBUG)
 
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
@@ -88,7 +89,8 @@ async def test_sk(user_input: str) -> str:
             service_id="azure-chat",
             deployment_name=deployment_name,
             endpoint=endpoint,
-            api_key=api_key
+            api_key=api_key,
+            api_version="2024-02-01"
         )
         kernel.add_service(chat_service)
         # Register the function with the kernel
@@ -103,6 +105,7 @@ async def test_sk(user_input: str) -> str:
         settings.max_tokens = 2000
         settings.temperature = 0.7
         settings.top_p = 0.8
+        
         answer = await kernel.invoke(
             chat_function, KernelArguments(settings=settings, user_input=user_input, chat_history=chat_history)
         )
