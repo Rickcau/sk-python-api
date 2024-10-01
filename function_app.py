@@ -77,8 +77,8 @@ async def test_sk(user_input: str) -> str:
         # api_key="<add your key here>"
         # endpoint="<add your endpoint here>"
         # deployment_name="<add your deployment name here>" 
-        api_key="7f62683640264f0d876d6e3ecb277d8b"
-        endpoint="https://rdc-azure-openai.openai.azure.com/"
+        api_key="xxx <yourAPI Key> 4f0d876d6e3ecb277d8b"
+        endpoint="https://<your endpoint>.openai.azure.com/"
         deployment_name="gpt-4o" 
         chat_history = ChatHistory(
             system_message="When responding to the user's request be nice and helpful. "
